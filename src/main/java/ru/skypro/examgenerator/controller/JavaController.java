@@ -1,16 +1,20 @@
 package ru.skypro.examgenerator.controller;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.examgenerator.entity.Question;
 import ru.skypro.examgenerator.service.QuestionService;
 
 @RestController
 @RequestMapping("exam/java")
-@RequiredArgsConstructor
 public class JavaController {
 
+
     private final QuestionService questionService;
+
+    public JavaController(@Qualifier("JavaQuestionService") QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @GetMapping("find")
     public Question findExam(Integer id){
